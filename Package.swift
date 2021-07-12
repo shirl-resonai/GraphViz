@@ -3,12 +3,23 @@
 
 import PackageDescription
 
+var packageTargets: [Target] = [
+    .testTarget(
+        name: "GraphVizTests",
+        dependencies: ["GraphViz"]),
+]
 #if os(Windows)
 let systemLibraries: [Target] = [
     .systemLibrary(
         name: "Clibgraphviz"
     )
 ]
+packageTargets = [
+    .target(
+        name: "GraphViz",
+        dependencies: ["Clibgraphviz"]),
+
+] + packageTargets
 #elseif os(macOS)
 let systemLibraries: [Target] = [
     .systemLibrary(
@@ -20,7 +31,18 @@ let systemLibraries: [Target] = [
         ]
     ),
 ]
+packageTargets = [
+    .target(
+        name: "GraphViz",
+        dependencies: ["Clibgraphviz"]),
+
+] + packageTargets
+#else
+let systemLibraries: [Target] = []
 #endif
+
+
+
 
 let package = Package(
     name: "GraphViz",
@@ -34,12 +56,5 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
-    targets: systemLibraries + [
-        .target(
-            name: "GraphViz",
-            dependencies: ["Clibgraphviz"]),
-        .testTarget(
-            name: "GraphVizTests",
-            dependencies: ["GraphViz"]),
-    ]
+    targets: systemLibraries + packageTargets
 )
