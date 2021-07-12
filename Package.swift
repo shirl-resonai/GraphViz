@@ -9,7 +9,7 @@ let systemLibraries: [Target] = [
         name: "Clibgraphviz"
     )
 ]
-#else
+#elseif os(macOS)
 let systemLibraries: [Target] = [
     .systemLibrary(
         name: "Clibgraphviz",
