@@ -11,6 +11,7 @@ extension Graph {
         - options: The rendering options.
      - Throws: `CocoaError` if the corresponding GraphViz tool isn't available.
      */
+    @available(iOS, unavailable, message: "No Renderer on iOS")
     public func render(using layout: LayoutAlgorithm,
                        to format: Format,
                        with options: Renderer.Options = [],
