@@ -76,6 +76,7 @@ public class Renderer {
         - format: The output format.
      - Throws: `Error` if GraphViz is unable to render.
      */
+    @available(iOS, unavailable, message: "Cannot render on iOS")
     public func render(dot: String,
                        to format: Format,
                        on queue: DispatchQueue = .main,
