@@ -27,9 +27,12 @@ public func attempt(throwing function: () -> Int32) throws {
 
 public func attempt<T>(throwing function: () -> T) throws -> T {
     let result = function()
+#if os(iOS)
+#else
     guard agerrors() == 0 else {
         throw Error()
     }
+#endif
 
     return result
 }
