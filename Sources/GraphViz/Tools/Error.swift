@@ -8,10 +8,11 @@ public struct Error: Swift.Error {
 
     private static var lastErrorMessage: String? {
 #if os(iOS)
+        return nil
 #else
         guard let error = aglasterr() else { return nil }
+            return String(cString: error)
 #endif
-        return String(cString: error)
     }
 
     init(message: String? = Error.lastErrorMessage) {
