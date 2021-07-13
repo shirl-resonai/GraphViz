@@ -7,7 +7,10 @@ public struct Error: Swift.Error {
     public let message: String?
 
     private static var lastErrorMessage: String? {
+#if os(iOS)
+#else
         guard let error = aglasterr() else { return nil }
+#endif
         return String(cString: error)
     }
 
