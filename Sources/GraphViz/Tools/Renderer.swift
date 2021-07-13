@@ -1,7 +1,10 @@
 import Foundation
 import Dispatch
 
+#if os(iOS)
+#else
 import Clibgraphviz
+#endif
 
 /**
  A GraphViz renderer.
@@ -78,6 +81,9 @@ public class Renderer {
                        on queue: DispatchQueue = .main,
                        completion: (@escaping (Result<Data, Swift.Error>) -> Void))
     {
+#if os(iOS)
+        fatalError("This function is not available on iOS")
+#else
         let options = self.options
         let layout = self.layout
 
@@ -112,5 +118,6 @@ public class Renderer {
 
             completion(result)
         }
+#endif
     }
 }
